@@ -5,39 +5,47 @@ import OndemandVideoSharpIcon from "@mui/icons-material/OndemandVideoSharp";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import HeaderLink from "../components/HeaderLink";
-import Link from "next/link";
+import Head from "next/head";
 
-const home = () => {
+import { getProviders, signIn } from "next-auth/react";
+
+const home = ({ providers }) => {
+  console.log(providers);
   return (
     <div className="sm:space-y-10 relative">
-      <header className="flex justify-around items-center py-4">
+      <Head>
+        <title>LinkedIn</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <header className="flex justify-around md:justify-between items-center py-4 md:px-16 ">
         <div className="relative w-36 h-10 cursor-pointer">
-          <Link href="/home">
-            <Image
-              src="https://rb.gy/vtbzlp"
-              layout="fill"
-              objectFit="contain"
-            />
-          </Link>
+          <Image src="https://rb.gy/vtbzlp" layout="fill" objectFit="contain" />
         </div>
 
         <div className="flex items-center sm:divide-x divide-gray-300">
-          <div className="hidden sm:flex space-x-8 pr-4">
+          <div className="hidden md:flex space-x-8 pr-4">
             <HeaderLink Icon={ExploreIcon} text="Discover" />
             <HeaderLink Icon={GroupIcon} text="People" />
             <HeaderLink Icon={OndemandVideoSharpIcon} text="Learning" />
             <HeaderLink Icon={BusinessCenterIcon} text="Jobs" />
           </div>
 
-          <div className="pl-4">
-            <button className="text-blue-700 font-semibold rounded-full border border-blue-700 px-5 py-1.5 transition-all hover:border-2">
-              Sigin in
-            </button>
-          </div>
+          {Object.values(providers).map((provider) => (
+            <div key={provider.name}>
+              <div className="pl-4 cursor-pointer hover:animate-pulse">
+                <p
+                  className="text-blue-700 text-sm sm:text-base  font-semibold rounded-full border border-blue-700 px-5 py-1.5 transition-all hover:border-2"
+                  onClick={() => signIn(provider.id, { callbackUrl: "/" })}
+                >
+                  Sign in with {provider.name}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </header>
 
-      <main className="flex flex-col xl:flex-row items-center max-w-screen-lg mx-auto -space-y-16">
+      <main className="flex flex-col md:flex-row items-center max-w-screen-lg mx-auto -space-y-16">
         {/* Left section  */}
         <div className="space-y-6 xl:space-y-10">
           <h1 className="text-3xl md:text-5xl text-amber-800/80 max-w-xl !leading-snug pl-4 xl:pl-0">
@@ -61,7 +69,7 @@ const home = () => {
         </div>
 
         {/* Right section  */}
-        <div className="relative xl:absolute w-80 h-80 xl:w-[500px] xl:h-[500px] top-24 -right-8 md:right-10">
+        <div className="relative xl:absolute w-80 h-80 xl:w-[500px] xl:h-[500px] top-32 -right-8 md:right-10">
           <Image src="https://rb.gy/vkzpzt" layout="fill" priority />
         </div>
       </main>
@@ -70,3 +78,12 @@ const home = () => {
 };
 
 export default home;
+
+export async function getServerSideProps(context) {
+  const providers = await getProviders();
+  return {
+    props: {
+      providers,
+    },
+  };
+}
