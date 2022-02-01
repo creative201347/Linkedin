@@ -1,2 +1,0 @@
-[+] Creating Next app with Tailwind CSS
-npx create-next-app -e with-tailwindcss
