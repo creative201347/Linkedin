@@ -5,13 +5,20 @@ import OndemandVideoSharpIcon from "@mui/icons-material/OndemandVideoSharp";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import HeaderLink from "../components/HeaderLink";
+import Link from "next/link";
 
 const home = () => {
   return (
     <div className="sm:space-y-10 relative">
       <header className="flex justify-around items-center py-4">
-        <div className="relative w-36 h-10">
-          <Image src="https://rb.gy/vtbzlp" layout="fill" objectFit="contain" />
+        <div className="relative w-36 h-10 cursor-pointer">
+          <Link href="/home">
+            <Image
+              src="https://rb.gy/vtbzlp"
+              layout="fill"
+              objectFit="contain"
+            />
+          </Link>
         </div>
 
         <div className="flex items-center sm:divide-x divide-gray-300">
@@ -30,7 +37,7 @@ const home = () => {
         </div>
       </header>
 
-      <main className="flex flex-col xl:flex-row items-center max-w-screen-lg mx-auto">
+      <main className="flex flex-col xl:flex-row items-center max-w-screen-lg mx-auto -space-y-16">
         {/* Left section  */}
         <div className="space-y-6 xl:space-y-10">
           <h1 className="text-3xl md:text-5xl text-amber-800/80 max-w-xl !leading-snug pl-4 xl:pl-0">
