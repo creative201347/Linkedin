@@ -10,7 +10,7 @@ import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import profile from "../assets/profile.png";
+import { Avatar } from "@mui/material";
 
 const spring = {
   type: "spring",
@@ -55,12 +55,7 @@ const Header = () => {
         <HeaderLink Icon={BusinessCenterIcon} text="Jobs" feed hidden />
         <HeaderLink Icon={ChatIcon} text="Messaging" feed />
         <HeaderLink Icon={NotificationsIcon} text="Notifications" feed />
-        <div className="flex flex-col justify-center mb-2 cursor-pointer">
-          <Image src={profile} height={35} width={35} objectFit="contain" />
-          <p className="hidden lg:inline text-sm text-black/60 hover:text-black dark:text-white/75 dark:hover:text-white">
-            Nabin Dhami
-          </p>
-        </div>
+        <HeaderLink Icon={Avatar} text="Nabin" feed avatar hidden />
         <HeaderLink Icon={AppsOutlinedIcon} text="Work" feed hidden />
 
         {/* Dark Mode Toggle  */}
