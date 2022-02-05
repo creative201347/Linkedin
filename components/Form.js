@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { modalState } from "../atoms/modalAtom";
+import { modalstate } from "../atoms/modalAtom";
 import { useRecoilState } from "recoil";
 
 function Form() {
   const { data: session } = useSession();
   const [input, setInput] = useState("");
-  const [modalOpen, setModalOpen] = useRecoilState(modalState);
+  const [modalOpen, setModalOpen] = useRecoilState(modalstate);
 
   const uploadPost = async (e) => {
     e.preventDefault();

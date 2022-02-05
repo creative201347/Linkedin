@@ -6,11 +6,11 @@ export const handlePostState = atom({
 });
 
 export const getPostState = atom({
-  key: "getPostState",
+  key: "getpoststate",
   default: {},
 });
 
 export const useSSRPostsState = atom({
-  key: "useSSRPostsState",
+  key: "useSSRpostsstate",
   default: true,
 });
