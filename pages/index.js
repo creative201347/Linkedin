@@ -10,7 +10,6 @@ import { useRecoilState } from "recoil";
 import { connectToDatabase } from "../util/mongodb";
 
 export default function Home({ posts }) {
-  console.log(posts);
   const [modalOpen, setModalOpen] = useRecoilState(modalState);
   const [modalType, setModalType] = useRecoilState(modalTypeState);
 
@@ -27,7 +26,7 @@ export default function Home({ posts }) {
       <main className="flex justify-center gap-x-4 px-4 sm:px-12">
         <div className="flex flex-col md:flex-row gap-5">
           <Sidebar />
-          <Feed />
+          <Feed posts={posts} />
         </div>
         {/* Widgets  */}
         <AnimatePresence>

@@ -4,7 +4,7 @@ import { handlePostState, useSSRPostsState } from "../atoms/postAtom";
 import Input from "../components/Input";
 import Post from "../components/Post";
 
-const Feed = () => {
+const Feed = ({ posts }) => {
   const [realTimePosts, setRealTimePosts] = useState([]);
   const [handlePost, setHandlePost] = useRecoilState(handlePostState);
   const [useSSRPosts, setUseSSRPosts] = useRecoilState(useSSRPostsState);
@@ -26,7 +26,10 @@ const Feed = () => {
   return (
     <div className="space-y-6 pb-24 max-w-lg">
       <Input />
-      <Post />
+
+      {!useSSRPosts
+        ? realTimePosts.map((post) => <Post key={post._id} post={post} />)
+        : posts.map((post) => <Post key={post._id} post={post} />)}
     </div>
   );
 };

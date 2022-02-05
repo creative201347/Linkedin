@@ -1,9 +1,7 @@
-import React from "react";
-
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <div>
-      <h1>post</h1>
+      <h2>{post?.input}</h2>
     </div>
   );
 };
